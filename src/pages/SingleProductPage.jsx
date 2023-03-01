@@ -1,13 +1,19 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { axiosInstance } from "../api/axios.config";
 import { useQuery } from "react-query";
 import React from "react";
-import { Flex, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, SkeletonCircle, SkeletonText, useBreakpointValue } from "@chakra-ui/react";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+import SingleProduct from "./../components/SingleProduct";
 
 const SingleProductPage = () => {
     const { productId } = useParams();
-    // const variant = ;
-        
+    const variant = useBreakpointValue({
+        base: 5,
+        md: 10,
+    });
+
     //   console.log(variant)
 
     const getProduct = async () => {
@@ -19,26 +25,26 @@ const SingleProductPage = () => {
         getProduct()
     );
 
-    if (isLoading) return <h1>loading</h1>;
+    if (isLoading)
+        return (
+            <Box padding={variant} boxShadow="lg" mt={25}>
+                <SkeletonCircle size="10" />
+                <SkeletonText
+                    mt="5"
+                    noOfLines={4}
+                    spacing="4"
+                    skeletonHeight="2"
+                />
+            </Box>
+        );
 
     return (
-        // <h3>hello</h3>
-        <Flex
-            justify={"center"}
-            h="100vh"
-            padding={() => useBreakpointValue(
-        {
-          base: 'outline',
-          md: 10,
-        },
-        {
-
-          fallback: 'md',
-        },
-      )}
-        >
-            {data.title}
-        </Flex>
+        <Box padding={variant}>
+            <Button colorScheme="cyan" as={Link} to="/" size="sm" fontSize={24}>
+                🔙
+            </Button>
+            <SingleProduct {...data} />
+        </Box>
     );
 };
 

@@ -14,19 +14,19 @@ import { Link as RouterLink } from "react-router-dom";
 
 const ProductItem = ({
     id,
-    images,
     price,
     title,
     description,
     brand,
     category,
     discountPercentage,
+    thumbnail
 }) => {
     return (
         <Card bg="none" border={"1px solid #a8b5c8"}>
             <CardBody>
                 <Image
-                    src={images[0]}
+                    src={thumbnail}
                     alt="Green double couch with wooden legs"
                     rounded="full"
                     w={180}

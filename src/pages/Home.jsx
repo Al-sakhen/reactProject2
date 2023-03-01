@@ -24,7 +24,7 @@ const HomePage = () => {
 
     const getProductsList = async () => {
         const { data } = await axiosInstance.get(
-            `/products?select=images,price,title,description${
+            `/products?select=thumbnail,price,title,description${
                 checkedItems[0] ? ",discountPercentage" : ""
             }${checkedItems[1] ? ",category" : ""}${
                 checkedItems[2] ? ",brand" : ""
